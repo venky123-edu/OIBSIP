@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --text-light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hero {
+            padding-top: 100px;
+            padding-bottom: 50px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--dark-color));
+            color: var(--text-light);
+            text-align: center;
+        }
+        
+        .profile {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            margin: 20px auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-color);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+            color: var(--secondary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto;
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(44, 62, 80, 0.9);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .contact-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .social-links li {
+            margin: 0 10px;
+        }
+        
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">My Profile</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#portfolio">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <img src=https://github.com/venky123-edu/my-pic/blob/main/venky%20pic%20.jpg?raw=true.png" alt="Professional headshot of a web developer smiling in front of a laptop" class="profile">
+            <h1>Hi, I'm [Venkatesh]</h1>
+            <p>A passionate web developer specializing in HTML and CSS. I create beautiful, responsive websites that provide great user experiences.</p>
+            <div>
+                <a href="#contact" class="btn">Contact Me</a>
+                <a href="#portfolio" class="btn">View My Work</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-icon">HTML</div>
+                    <h3>HTML5</h3>
+                    <p>Semantic markup, accessibility best practices, modern HTML features.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">CSS</div>
+                    <h3>CSS3</h3>
+                    <p>Responsive design, CSS Grid, Flexbox, animations, and transitions.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">UI</div>
+                    <h3>UI Design</h3>
+                    <p>Creating intuitive and visually appealing user interfaces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f9003c2d-b883-439c-bc6f-6b25da70d4f0.png" alt="Business website design with blue color scheme and clean layout">
+                    <div class="portfolio-overlay">
+                        <h3>Business Website</h3>
+                        <p>A responsive website for a local business.</p>
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/13527465-0a82-4338-a62d-f0fbca959eb6.png" alt="Portfolio website design showing creative layout with multiple sections">
+                    <div class="portfolio-overlay">
+                        <h3>Portfolio Website</h3>
+                        <p>A personal portfolio for a photographer.</p>
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7181273e-2fe1-4ed3-9967-e8809deb72b1.png" alt="E-commerce product page showing product cards and shopping cart">
+                    <div class="portfolio-overlay">
+                        <h3>E-commerce Site</h3>
+                        <p>A single page e-commerce product display.</p>
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="contact-icon">Email</div>
+                    <h3>Email</h3>
+                    <p>sanapalavenkatesh2006@gmail.com</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">Phone</div>
+                    <h3>Phone</h3>
+                    <p>9398008425</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">Location</div>
+                    <h3>Location</h3>
+                    <p>VSKP, AP</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn" download>Download Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <ul class="social-links">
+                <li><a href="#">GitHub</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+            <p>© 2023 S.VENAKTESH . All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Simple scroll animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.skill-card, .portfolio-item, .contact-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
+
